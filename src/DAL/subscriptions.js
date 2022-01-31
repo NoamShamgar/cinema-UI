@@ -8,7 +8,7 @@ const subscriptionsAPI = axios.create({
 })
 
 // adding a "middleware" to handle error due to expired access token, trying to get a new one
-subscriptionsAPI.interceptors.response.use((req => req),errorResponse)
+subscriptionsAPI.interceptors.response.use((res => res),errorResponse)
 
 
 const getAllSubscriptions_DAL = async () => {

@@ -8,7 +8,7 @@ const moviesAPI = axios.create({
 })
 
 // adding a "middleware" to handle error due to expired access token, trying to get a new one
-moviesAPI.interceptors.response.use((req => req),errorResponse)
+moviesAPI.interceptors.response.use((res => res),errorResponse)
 
 
 const getAllMovies_DAL = async () => {

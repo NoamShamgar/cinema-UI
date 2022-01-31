@@ -1,6 +1,7 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import UpdateEmployee from "./UpdateEmployee"
+import { deleteEmployee_UTIL } from '../../utils/employees';
+
 
 //MUI
 import Accordion from '@mui/material/Accordion';
@@ -15,6 +16,16 @@ import { Box } from '@mui/system';
 export default function Employee(props) {
   const [showUpdate, setShowUpdate] = useState(false);
 
+  const deleteEmployee = async (id) => {
+    try{
+         await deleteEmployee_UTIL(id);
+         await props.fetchEmployees();
+    } catch (err){
+        console.log(err);
+    }
+ }
+
+
     return <div style={{padding:"0 20%"}}>
             <div>   
                     <Accordion>
@@ -28,8 +39,8 @@ export default function Employee(props) {
                                 
                                 <Box>
                                 {props.employee.permissions.includes("sys-admin")?null:<div>
-                                    <Button onClick={()=>{setShowUpdate(true)}}>Edit</Button>
-                                    <Button onClick={()=>props.deleteEmployee(props.employee._id)}>Delete</Button>
+                                    <Button onClick={(e)=>{ e.stopPropagation(); setShowUpdate(true)}}>Edit</Button> {/*stopPropagation is to prevent accordion to fold/unfold on edit*/}
+                                    <Button onClick={(e)=>{e.stopPropagation(); deleteEmployee(props.employee._id)}}>Delete</Button>
                                     </div>}
                                 </Box>
                         </Box>

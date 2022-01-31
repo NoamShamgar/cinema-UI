@@ -8,9 +8,22 @@ import { checkValidation } from '../../helpers/validation';
 import MovieGenres from './MovieGenres';
 import dateToString from '../../helpers/dateToString';
 
+
+//MUI
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { makeStyles } from '@mui/styles';
+import {formStyles} from "../../styles/styles"
+
+const useFormStyles = makeStyles(formStyles)
+
+
 export default function UpdateMovie(props) {
     const [movie, setMovie] = useState({name:"",genres:[],image:"",premiered:""})
     const [errors, setError] = useState("");
+    const classes = useFormStyles();
 
 
     useEffect(() => {
@@ -47,22 +60,57 @@ export default function UpdateMovie(props) {
 
             <div className='background' onClick={props.hideUpdateModal}></div>
 
-            <div className='contentContainer'>
-            <h1>update movie</h1>
-            name: <input type="text" value={movie.name} onChange={e=>setMovie({...movie,name:e.target.value})} /><br/>
-            image url: <input type="text" value={movie.image} onChange={e=>setMovie({...movie,image:e.target.value})} /><br/>
-            premiered: <input type="date" max={dateToString()} value={dateToString(movie.premiered)} onChange={e=>setMovie({...movie,premiered:e.target.value})} /><br/>
-            genres:<MovieGenres setMovieGenres={setMovieGenres} movieGenres={movie.genres} />
+            <Box className={`${classes.box} ${classes.fixedBox}`}>
+            <Typography 
+                            variant="h3" 
+                            color="secondary"
+                            component="h1" 
+                            color="primary">
+                                Update Movie
+                        </Typography> 
+                                   
+                                   
+            <TextField 
+                type="text" 
+                value={movie.name} 
+                label="Name" 
+                className={classes.input} 
+                color="secondary"
+                size="small"
+                margin='dense'
+                onChange={e=>setMovie({...movie,name:e.target.value})} /><br/>
 
 
-                    <button onClick={updateMovie}>Update</button>
+            <TextField 
+                type="text" 
+                label="image Url" 
+                value={movie.image} 
+                className={classes.input} 
+                color="secondary"
+                size="small"
+                margin='dense'
+                onChange={e=>setMovie({...movie,image:e.target.value})} /><br/>
+            <TextField 
+                type="date" 
+                label="Premiered" 
+                max={dateToString()} 
+                value={dateToString(movie.premiered)} 
+                className={classes.input} 
+                color="secondary"
+                size="small"
+                margin='dense'
+                onChange={e=>setMovie({...movie,premiered:e.target.value})} /><br/>
+            <MovieGenres setMovieGenres={setMovieGenres} movieGenres={movie.genres} />
+
+
+                    <Button onClick={updateMovie}>Update</Button>
                 
                 
                 <Errors errors={errors}/>
                 
 
 
-            </div>
+            </Box>
         </div>
     )
 }

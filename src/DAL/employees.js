@@ -8,7 +8,7 @@ const employeesAPI = axios.create({
 })
 
 // adding a "middleware" to handle error due to expired access token, trying to get a new one
-employeesAPI.interceptors.response.use((req => req),errorResponse)
+employeesAPI.interceptors.response.use((res => res),errorResponse)
 
 
 const getAllEmployees_DAL = async () => {

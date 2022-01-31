@@ -16,27 +16,27 @@ import Popover from '@mui/material/Popover';
 
 
 export default function MoviesWatched(props) {
-    const [showAddMovie, setShowAddMovie] = useState(false);
     const [popoverAnchor, setPopoverAnchor] = useState(null);
     const navigate = useNavigate()
 
-    useEffect(()=>{
-        setShowAddMovie(false)
-    },[props.memberId])
+    const closeAddSub = () => {
+        setPopoverAnchor(null)
+    }
     
     const open = Boolean(popoverAnchor);
 
     return <div>
                 <div>
                     {/* {checkPermissions("add-sub")&& <Button size='small' variant='contained' onClick={()=>setShowAddMovie(!showAddMovie)}>add movie to subscription</Button>} */}
-                    {checkPermissions("add-sub")&& <Button 
-                                                        size='small' 
-                                                        variant='contained'
-                                                         onClick={(e)=>{
-                                                             setShowAddMovie(!showAddMovie)
-                                                            setPopoverAnchor(e.target)
-                                                             }}>add movie to subscription</Button>}
+                    {checkPermissions("add-sub")&&
+                    <Button 
+                        size='small' 
+                        variant='contained'
+                        onClick={(e)=>{
+                                setPopoverAnchor(e.target)
+                                }}>add movie to subscription</Button>}
                     
+
                     <Popover
                         open={open}
                         anchorEl={popoverAnchor}
@@ -48,14 +48,15 @@ export default function MoviesWatched(props) {
                         transformOrigin={{
                             vertical: 'top',
                             horizontal: 'center',
-                          }}
-                    >
+                          }}>
+                              
                             <Box sx={{width:"70vh"}}>
                                 <AddMovieToMember 
                                         watchedMovies={props.moviesWatched?.map(watchInstance => watchInstance.movie) || []} // return array of movies, without the watchdate      
                                         subId={props?.subId}
                                         memberId={props.memberId}
                                         fetchMembers={props.fetchMembers}
+                                        closeAddSub={closeAddSub}
                                         />
                             </Box>
 
@@ -77,12 +78,6 @@ export default function MoviesWatched(props) {
                     </Box>
                 </div>
 
-                {/* {checkPermissions("add-sub")&& showAddMovie&&<AddMovieToMember 
-                                        watchedMovies={props.moviesWatched?.map(watchInstance => watchInstance.movie) || []} // return array of movies, without the watchdate      
-                                        subId={props?.subId}
-                                        memberId={props.memberId}
-                                        fetchMembers={props.fetchMembers}
-                                        />} */}
 
 
         </div>;

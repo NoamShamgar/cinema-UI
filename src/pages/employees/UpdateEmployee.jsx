@@ -64,7 +64,8 @@ export default function UpdateEmployee(props) {
             props.fetchEmployees();
             props.hideUpdateModal()
         } catch (err) {
-            console.log(err);
+            console.dir(err.response.data);
+            setError(err)
         }
     }
 
@@ -72,9 +73,8 @@ export default function UpdateEmployee(props) {
         <div>
             
             <div className='background' onClick={props.hideUpdateModal}></div>
-
             
-                <Box className={classes.box}>
+                <Box className={`${classes.box} ${classes.fixedBox}`}>
                     <Typography 
                             variant="h3" 
                             color="secondary"

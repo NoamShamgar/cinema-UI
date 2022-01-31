@@ -34,7 +34,7 @@ export default function SetPass() {
             await setPassToEmployee_UTIL(email,password);
             navigate("/");
         } catch (err) {
-            setError(err.response.data);
+            setError(err);
         }
     }
     

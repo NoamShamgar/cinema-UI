@@ -6,10 +6,21 @@ import { getMember_UTIL, updateMember_UTIL } from '../../utils/members';
 import Errors from '../../components/Errors';
 import { checkValidation } from '../../helpers/validation';
 
+//MUI
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { makeStyles } from '@mui/styles';
+import {formStyles} from "../../styles/styles"
+
+const useFormStyles = makeStyles(formStyles)
+
 
 export default function UpdateMember(props) {
     const [member, setMember] = useState({name:"",email:"",city:""});
     const [errors, setError] = useState("");
+    const classes = useFormStyles();
 
 
     useEffect(() => {
@@ -44,21 +55,51 @@ export default function UpdateMember(props) {
             
             <div className='background' onClick={props.hideUpdateModal}></div>
 
-            <div className='contentContainer'>
-            <h1>update member</h1>
+            <Box className={`${classes.box} ${classes.fixedBox}`}>
+            <Typography 
+                            variant="h3" 
+                            color="secondary"
+                            component="h1" 
+                            color="primary">
+                                Update Member
+                        </Typography>
            
-            Name: <input type="text" value={member.name} placeholder="Name" onChange={e=>setMember({...member,name:e.target.value})} /><br/>
-            Email: <input type="text" value={member.email} placeholder="Email" onChange={e=>setMember({...member,email:e.target.value})} /><br/>
-            City: <input type="text" value={member.city} placeholder="City" onChange={e=>setMember({...member,city:e.target.value})} /><br/>
+            <TextField 
+                type="text" 
+                value={member.name} 
+                label="Name"
+                className={classes.input} 
+                color="secondary"
+                size="small"
+                margin='dense'
+                onChange={e=>setMember({...member,name:e.target.value})} /><br/>
+            <TextField 
+                type="text" 
+                value={member.email} 
+                label="Email" 
+                className={classes.input} 
+                color="secondary"
+                size="small"
+                margin='dense'
+                onChange={e=>setMember({...member,email:e.target.value})} /><br/>
+            <TextField 
+                type="text" 
+                value={member.city} 
+                label="City" 
+                className={classes.input} 
+                color="secondary"
+                size="small"
+                margin='dense'
+                onChange={e=>setMember({...member,city:e.target.value})} /><br/>
 
-            <button onClick={updateMember}>Update</button>
+            <Button onClick={updateMember}>Update</Button>
                 
                 
                 <Errors errors={errors}/>
                 
 
 
-            </div>
+            </Box>
         </div>
     )
 }

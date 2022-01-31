@@ -53,8 +53,9 @@ export default function AddEmployee() {
         }
         try{
             await addEmployee_UTIL(employee);
-            navigate("/employees/list")
+            navigate("/employees")
         } catch (err) {
+            setError(err)
             console.log(err);
         }
     }

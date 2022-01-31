@@ -45,7 +45,7 @@ export default function AddMember() {
         }
         try{
             await addMember_UTIL(member);
-            navigate("/members/list")
+            navigate("/members")
         } catch (err) {
             console.log(err);
         }

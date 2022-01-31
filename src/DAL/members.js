@@ -8,7 +8,7 @@ const membersAPI = axios.create({
 })
 
 // adding a "middleware" to handle error due to expired access token, trying to get a new one
-membersAPI.interceptors.response.use((req => req),errorResponse)
+membersAPI.interceptors.response.use((res => res),errorResponse)
 
 
 const getAllMembers_DAL = async () => {

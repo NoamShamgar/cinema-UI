@@ -57,8 +57,8 @@ export default function Movie(props) {
                                       <Typography variant="body1" component="p">{props.movie.premiered.replaceAll("-","/").slice(0,10)} </Typography> 
                                 </Box>  
                   
-                                <Box sx={{display:"flex"}}>
-                                     {props.movie.genres.map((genre,i)=><Typography key={i}>{genre}</Typography>)}
+                                <Box sx={{display:"flex",flexWrap:"wrap"}}>
+                                     {props.movie.genres.map((genre,i)=><Typography key={i}>{i!==0&&","}{genre}</Typography>)}
                                 </Box>
 
                                 <Box>

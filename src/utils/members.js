@@ -10,7 +10,6 @@ const getMember_UTIL = async (id) => {
         delete member.__v
         return member;
    } catch(err) {
-       console.log("in err");
        return err;
    }
 }

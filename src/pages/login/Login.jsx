@@ -35,15 +35,15 @@ export default function Login() {
         }
 
         try {
-            let employee = await login(email,password);
+            const employee = await login(email,password);
             navigate("/main");
             dispatch({type:"LOGIN",payload:employee});
 
         } catch (err) {
-            console.log(err.response.data);
-                    setError(err.response.data);
-                }
-        }
+                    console.log(err.response.data);
+                    setError(err);
+            }
+    }
     
     
     return (

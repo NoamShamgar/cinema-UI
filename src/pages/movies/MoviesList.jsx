@@ -2,6 +2,7 @@ import React from 'react'
 import { useState,useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import {getAllMoviesWithMembersWatched_UTIL} from "../../utils/movies"
+import CircularProgress from '@mui/material/CircularProgress';
 import Movie from "./Movie";
 
 //MUI
@@ -17,7 +18,8 @@ export default function MoviesList() {
     const location = useLocation()
     const navigate = useNavigate()
     const [movies, setMovies] = useState([])
-    const [searchString, setSearchString] = useState([])
+    const [searchString, setSearchString] = useState("")
+    const [loading, setLoading] = useState(true)
     const classes = useGridStyles()
 
 
@@ -33,23 +35,24 @@ export default function MoviesList() {
             })()
         },[]);
 
-        useEffect(() => { // handles search movies
-            const cloneAllMovies = [...movies]
-            cloneAllMovies.forEach(movie => {
-            movie.show = movie.name.toLowerCase().includes(searchString.toLowerCase())
-            });
-            
-            setMovies(cloneAllMovies);        
-       
+        useEffect(() => { 
+            showSearchedMovies();
         }, [searchString]);
-        
 
+
+        const showSearchedMovies = (clonedMovies = [...movies]) => {
+            clonedMovies.forEach(movie => {
+                    movie.show = movie.name.toLowerCase().includes(searchString.toLowerCase()) // if searchString is empty, this will return true
+            });
+            setMovies(clonedMovies); 
+        }
+        
         // fetching employees and setting in state
         const fetchMovies = async () => {
             try{
                 const allMovies = await getAllMoviesWithMembersWatched_UTIL();
-                allMovies.forEach(movie => movie.show = true)
-                setMovies(allMovies); // adding "show" key to all the movies
+                showSearchedMovies(allMovies);
+                setLoading(false);
             } catch (err) {
                 console.log(err);
             }   
@@ -58,6 +61,8 @@ export default function MoviesList() {
 
     return <div style={{textAlign:"center"}}>
         <TextField type="search" sx={{width:"40%",marginBottom:2}} label="Search Movie" value={searchString} onChange={e=>setSearchString(e.target.value)} placeholder="search movies" />
+
+        {loading&&<CircularProgress sx={{display:"block",margin:"auto",width:"50%"}} disableShrink color="primary" />}
 
             <Grid container className={classes.gContainer}>
             {movies.map((movie,i) => movie.show&&

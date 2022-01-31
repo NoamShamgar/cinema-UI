@@ -110,8 +110,6 @@ export default function Placeholder() {
                         <Route path="/members" element={<MembersList/>} />
                         <Route path="/members/add" element={<AddMember />}/>
                         <Route path="/members/:id" element={<Member />}/>
-                      
-                    
                 </Route> 
 
                  {/* guests routes */}

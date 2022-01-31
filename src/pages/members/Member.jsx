@@ -26,12 +26,14 @@ export default function Member(props) {
 
 
     useEffect(()=>{
-        (async ()=>{
-        setMember(
-            props.member || await getMember_UTIL(params.id)
-        )})()
-
+        fetchMember();
     },[props,params])
+
+
+    const fetchMember = async () => {
+        // if the member came from the list, the prop should exist, if this is a single item - get the id from the url and fetch it
+        setMember(props.member || await getMember_UTIL(params.id))
+    }
 
     const deleteMember = async (id) => {
         try{
@@ -39,7 +41,7 @@ export default function Member(props) {
              if(props.fetchMembers){
                 props.fetchMembers();
              } else {
-                navigate("/members/list")
+                navigate("/members")
              }
         } catch (err){
             console.log(err);
@@ -65,7 +67,7 @@ export default function Member(props) {
                                         />}
                     </Box>
                 {showUpdate&&<UpdateMember id={member._id}
-                                     fetchMembers={props.fetchMembers}
+                                     fetchMembers={props.fetchMembers || fetchMember} // if its part of a list, fetch all members, if its single item, fetch only one, and from this component
                                      hideUpdateModal={() => {setShowUpdate(false)}}/>}
         </Box>
 }

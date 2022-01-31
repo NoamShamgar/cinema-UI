@@ -2,26 +2,29 @@ const lightgray = "#f4f4f4"
 
 
 
- const formStyles = (theme) => {
-    return {
+ const formStyles = {
         box:{
-            position:"absolute",
-            top:"30%",
-            left:"50%",
-            transform:"translateX(-50%)",
+            margin:"auto",
             textAlign:"center",
-            width: "30%",
+            width: "clamp(450px,50%,600px)",
+            maxHeight:"80%",
             padding:"30px",
             backgroundColor:lightgray,
             borderRadius:"5px",
-            boxShadow:"0 0 14px 0px #0000006e"
+            boxShadow:"0 0 14px 0px #0000006e",
+        },
+        fixedBox:{
+            position:"fixed",
+            top:"20%",
+            left:"50%",
+            transform:"translateX(-50%)",
+            zIndex:2000
         },
         input:{
             marginTop:20,
             marginBottom:20,
             display:"block",
         }
-    }
 }
 
 
@@ -39,14 +42,11 @@ const layoutStyles = (theme) => {
     }
 }
 
-const gridStyles = (theme) => {
-    return {
+const gridStyles = {
         gContainer: {
             justifyContent:"center",
             alignItems:"center",
         },
-  
-    }
 }
 
 const gridItemStyles = (theme) => {

@@ -7,7 +7,6 @@ const login = (email,password) => {
         try {
             const response = await login_DAL(email,password);
             sessionStorage.setItem("r-TOK",response.data.refreshToken);
-
             resolve(response.data.employee);
         } catch (err) {
             reject(err)

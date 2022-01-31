@@ -1,6 +1,6 @@
 import React,  { useState,useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { getAllEmployees_UTIL,deleteEmployee_UTIL } from '../../utils/employees';
+import { getAllEmployees_UTIL } from '../../utils/employees';
 import Employee from './Employee';
 import checkPermissions from '../../auth/checkperm';
 
@@ -27,20 +27,12 @@ export default function EmployeesList() {
        }
     }
 
-    const deleteEmployee = async (id) => {
-       try{
-            await deleteEmployee_UTIL(id);
-            await fetchEmployees();
-       } catch (err){
-           console.log(err);
-       }
-    }
+    
 
     return (
         <div>
             {employees.map((employee,i) => 
         <Employee key={i} employee={employee} 
-                          deleteEmployee={deleteEmployee}
                           fetchEmployees={fetchEmployees}
                           />)}
             <Outlet/>

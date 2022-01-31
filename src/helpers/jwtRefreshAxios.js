@@ -7,9 +7,8 @@ let path = "http://localhost:8000"
 // if the reason of the error is expired access token, this function will try to get a new token with the access token and send the req back to te client
 const errorResponse = async (res) => {
 
-  if(res.response?.data?.message == "jwt expired") { // the reason of the error is the access token expired
+  if (res.response?.data?.message == "jwt expired") { // the reason of the error is the access token expired
         // asking for a new access token
-
         console.log("token expired, asking for a new one");
 
         let rTok = sessionStorage.getItem("r-TOK");
@@ -26,7 +25,7 @@ const errorResponse = async (res) => {
         }
     }
 
-  return res
+    return Promise.reject(res);
 }
     
 

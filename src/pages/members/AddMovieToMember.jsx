@@ -4,6 +4,9 @@ import { useState } from 'react';
 import dateToString from '../../helpers/dateToString';
 import { getAllMovies_UTIL } from '../../utils/movies';
 import { addSubscription_UTIL,addMovieToSubscription_UTIL } from '../../utils/subscriptions';
+import Errors from '../../components/Errors';
+import { checkValidation } from '../../helpers/validation';
+
 
 // MUI
 import Box from '@mui/material/Box';
@@ -19,8 +22,9 @@ import Select from '@mui/material/Select';
 
 export default function AddMovieToMember(props) {
   const [moviesArr, setMoviesArr] = useState([]);
-  const [selectedMovieId, setSelectedMovieId] = useState("");
   const [date, setDate] = useState("");
+  const [selectedMovieId, setSelectedMovieId] = useState("");
+  const [errors, setError] = useState("");
 
   useEffect(() => {
     let unmounted = false;
@@ -33,7 +37,7 @@ export default function AddMovieToMember(props) {
             // removing subscribed movies from all movies
             props.watchedMovies.forEach(watchedMovie => {
                 const index = allMovies.findIndex(movie => movie._id === watchedMovie._id);
-                allMovies.splice(index,1)
+                allMovies.splice(index,1);
             });
 
             if  (!unmounted){ // local variable to prevent react error which we try to update state on unmounted component
@@ -49,14 +53,20 @@ export default function AddMovieToMember(props) {
     unmounted = true
   }
    
-  }, [props]);
+  }, []);
 
 
+  
   
   
  
 
   const addToSub = async () => {
+    const errArr = checkValidation({anyDate:date,selectedMovieId}); // changing the name of the date so the validation won't prevent future dates
+    if (errArr.length !== 0) {
+        setError(errArr)
+        return
+    }
     try {
       if(props.subId) { // subscription already exist, add to exist 
         await addMovieToSubscription_UTIL(props.subId,{movieId:selectedMovieId, watchDate:date});
@@ -64,8 +74,8 @@ export default function AddMovieToMember(props) {
       } else { // first time subscribe, create a new subscribe document
         await addSubscription_UTIL({memberId:props.memberId,movies:[{movieId:selectedMovieId,watchDate:date}]});
       }
-      props.fetchMembers()
-
+      props.closeAddSub();
+      props.fetchMembers();
 
     } catch (err) {
       console.log(err);
@@ -75,32 +85,43 @@ export default function AddMovieToMember(props) {
 
   const preWatchedMovies = (
     <FormControl fullWidth>
-    <InputLabel>Movie</InputLabel>
-    <Select
-      value={selectedMovieId}
-      label="Movie"
-      onChange={e=>setSelectedMovieId(e.target.value)}
-    >
-    <MenuItem value=""></MenuItem>
-        {moviesArr.map((movie,i) => 
-          <MenuItem key={i} value={movie._id}>{movie.name}</MenuItem>
 
-          )};
+        <InputLabel>Movie</InputLabel>
+        <Select
+              value={selectedMovieId}
+              label="Movie"
+              onChange={e=>setSelectedMovieId(e.target.value)}
+            >
+            <MenuItem value=""></MenuItem>
+                {moviesArr.map((movie,i) => 
+                  <MenuItem key={i} value={movie._id}>{movie.name}</MenuItem>
 
-</Select>
-</FormControl>  )
+                  )};
+
+          </Select>
+      </FormControl>  )
 
         
 
 
   return <div style={{textAlign:"center",padding:"20px"}}>
-                    <Typography>Add movie to the subscription</Typography>
+                  
+              <Typography>Add movie to the subscription</Typography>
               <Box sx={{display:"flex"}}>
                     {preWatchedMovies}
 
-                <TextField sx={{width:0.6}} type="date" value={date} min={dateToString()} onChange={e=>setDate(e.target.value)}/>
+                    <TextField 
+                      sx={{width:0.6}} 
+                      label="Date Watched"  
+                      InputLabelProps={{shrink: true}} 
+                      type="date" 
+                      value={date} 
+                      min={dateToString()} 
+                      onChange={e=>setDate(e.target.value)}/>
+
               </Box>
                     <Button onClick={addToSub}>Add</Button>
+                    <Errors errors={errors}/>
 
 
 
