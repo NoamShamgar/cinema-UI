@@ -14,6 +14,7 @@ import AddMember from './pages/members/AddMember';
 import MembersList from './pages/members/MembersList';
 import Member from './pages/members/Member';
 import checkSession_DAL from './DAL/checkSession';
+import "./styles/body.css"
 
 
 // MUI

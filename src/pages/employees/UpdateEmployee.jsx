@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react';
-import "../../styles/modal.css"
 import  EmployeePermissions  from "./EmployeePermissions";
 import { useEffect } from 'react';      
 import { getEmployee_UTIL, updateEmployee_UTIL } from '../../utils/employees';
@@ -72,7 +71,7 @@ export default function UpdateEmployee(props) {
     return (
         <div>
             
-            <div className='background' onClick={props.hideUpdateModal}></div>
+            <div className={classes.updateBG} onClick={props.hideUpdateModal}></div>
             
                 <Box className={`${classes.box} ${classes.fixedBox}`}>
                     <Typography 

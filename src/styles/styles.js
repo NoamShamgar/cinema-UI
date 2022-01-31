@@ -24,6 +24,13 @@ const lightgray = "#f4f4f4"
             marginTop:20,
             marginBottom:20,
             display:"block",
+        },
+        updateBG:{
+            backgroundColor:"black",
+            opacity:0.8,
+            position: "fixed",
+            zIndex: 2000,
+            inset: 0
         }
 }
 
@@ -37,6 +44,9 @@ const layoutStyles = (theme) => {
         },
         themeSec:{
             backgroundColor:theme.palette.secondary.main,
+        },
+        themePrm:{
+            backgroundColor:theme.palette.primary.main,
         }
   
     }

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react';
-import "../../styles/modal.css"
 import { useEffect } from 'react';
 import { getMember_UTIL, updateMember_UTIL } from '../../utils/members';
 import Errors from '../../components/Errors';
@@ -53,7 +52,7 @@ export default function UpdateMember(props) {
     return (
         <div>
             
-            <div className='background' onClick={props.hideUpdateModal}></div>
+            <div className={classes.updateBG} onClick={props.hideUpdateModal}></div>
 
             <Box className={`${classes.box} ${classes.fixedBox}`}>
             <Typography 

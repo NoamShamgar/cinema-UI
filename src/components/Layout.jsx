@@ -15,7 +15,6 @@ import {layoutStyles} from "../styles/styles"
 import { makeStyles } from '@mui/styles';
 import IconButton from '@mui/material/IconButton';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
-import { minHeight } from '@mui/system';
 
 
 const uselayoutStyles = makeStyles(layoutStyles)
@@ -124,12 +123,12 @@ export default function Header(props) {
             {props.children}
             </div>
       
-                <Box sx={{
-                    backgroundColor:"red",
-                    textAlign:"center",
-                    marginTop:5
+                <Box className={classes.themePrm} sx={{
+                    marginTop:5,
+                    padding:5,
+                    textAlign:"center"
                 }}> 
-                    footer
+                    <Typography color="secondary">Built by Noam Shamgar</Typography>
                 </Box>
 
 

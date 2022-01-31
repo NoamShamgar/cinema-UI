@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react';
-import "../../styles/modal.css"
 import { useEffect } from 'react';
 import { getMovie_UTIL, updateMovie_UTIL } from '../../utils/movies';
 import Errors from '../../components/Errors';
@@ -58,7 +57,7 @@ export default function UpdateMovie(props) {
     return (
         <div>
 
-            <div className='background' onClick={props.hideUpdateModal}></div>
+            <div className={classes.updateBG} onClick={props.hideUpdateModal}></div>
 
             <Box className={`${classes.box} ${classes.fixedBox}`}>
             <Typography 
