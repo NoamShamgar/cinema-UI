@@ -43,7 +43,7 @@ export default function Movie(props) {
  const open = Boolean(popoverAnchor);
 
     return <Box className={classes.container}>
-                    <img src={props.movie.image} alt="" onMouseEnter={()=>setShowDetails(true)} /> 
+                    <img src={props.movie.image} style={{width:"210px",height:"295px"}} alt="" onMouseEnter={()=>setShowDetails(true)} /> 
 
                       <Fade in={showDetails} className={classes.details} onMouseLeave={()=>setShowDetails(false)}>
                           <Box sx={{

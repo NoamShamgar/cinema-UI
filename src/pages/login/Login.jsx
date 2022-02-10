@@ -19,8 +19,8 @@ const useFormStyles = makeStyles(formStyles)
 
 export default function Login() {
     
-    const [email, setEmail] = useState("noam@gmail.com");
-    const [password, setPassword] = useState("123456");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [errors, setError] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();

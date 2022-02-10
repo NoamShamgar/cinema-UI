@@ -41,7 +41,7 @@ export default function AddMovie() {
         }
         try{
             await addMovie_UTIL(movie);
-            navigate("/movies/list")
+            navigate("/movies")
         } catch (err) {
             console.log(err);
         }

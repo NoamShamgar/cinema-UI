@@ -110,7 +110,9 @@ export default function Header(props) {
             <Toolbar variant='dense' className={classes.themeSec}>
                  
                  <Box>
-                    <Button onClick={()=>navigate(`${location.pathname.split("/")[1]}/add`)}>Add</Button>
+            {location.pathname.includes("/movies")&&checkPermissions("add-mov")&&<Button onClick={()=>navigate(`movies/add`)}>Add</Button>}
+            {location.pathname.includes("/members")&&checkPermissions("add-sub")&&<Button onClick={()=>navigate(`members/add`)}>Add</Button>}
+            {location.pathname.includes("/employees")&&<Button onClick={()=>navigate(`employees/add`)}>Add</Button>}
                     <Button onClick={()=>navigate(location.pathname.split("/")[1])}>List</Button>
                 </Box>
 

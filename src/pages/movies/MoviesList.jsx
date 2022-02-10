@@ -24,7 +24,7 @@ export default function MoviesList() {
 
 
     useEffect(() => {
-        !checkPermissions("view-sub") && navigate("/permdenied")
+        !checkPermissions("view-mov") && navigate("/permdenied")
     }, []);
     
      // calling the fetch method on mount and checking permissions
