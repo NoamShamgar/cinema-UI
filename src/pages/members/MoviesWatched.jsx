@@ -17,10 +17,11 @@ import Popover from '@mui/material/Popover';
 
 export default function MoviesWatched(props) {
     const [popoverAnchor, setPopoverAnchor] = useState(null);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
+    // closing [addsub] component
     const closeAddSub = () => {
-        setPopoverAnchor(null)
+        setPopoverAnchor(null);
     }
     
     const open = Boolean(popoverAnchor);

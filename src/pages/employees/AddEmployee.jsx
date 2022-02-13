@@ -24,12 +24,12 @@ export default function AddEmployee() {
     const [errors, setError] = useState("");
     const classes = useFormStyles();
 
-    useEffect(() => {
+    useEffect(() => { // if its not sys-admin, navigate out this page
         !checkPermissions("sys-admin") && navigate("/permdenied")
     }, []);
 
 
-    useEffect(() => { // preventing from exceeding the limits in sessTimeOut
+    useEffect(() => { // preventing from exceeding the limits in sessTimeOut input
         if(employee.sessTimeout > 120){
             setEmployee({...employee,sessTimeout:120})
            }
@@ -40,14 +40,14 @@ export default function AddEmployee() {
     }, [employee.sessTimeout])
     
 
-    const setPermissions = (newPermissions) => {
-        setEmployee({...employee,permissions:newPermissions})
+    const setPermissions = (newPermissions) => { // getting data from child component, setting in this comp state
+        setEmployee({...employee,permissions:newPermissions});
     }
 
 
     const addEmployee = async () => {
-        const errArr = checkValidation(employee);
-        if (errArr.length !== 0) {
+        const errArr = checkValidation(employee); // checking validation
+        if (errArr.length !== 0) { // if validation arr is not empty will set error and return
             setError(errArr)
             return
         }

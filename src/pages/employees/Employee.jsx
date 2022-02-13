@@ -14,7 +14,7 @@ import { Box } from '@mui/system';
 
 
 export default function Employee(props) {
-  const [showUpdate, setShowUpdate] = useState(false);
+  const [showUpdate, setShowUpdate] = useState(false); // whether to show update comp or not
 
   const deleteEmployee = async (id) => {
     try{
@@ -76,7 +76,7 @@ export default function Employee(props) {
 
 
 
-        {showUpdate?<UpdateEmployee id={props.employee._id} 
+        {showUpdate?<UpdateEmployee id={props.employee._id} // displaying updateEmployee comp 
                                     fetchEmployees={props.fetchEmployees} 
                                     hideUpdateModal={() => {setShowUpdate(false)}}/>
         :null}

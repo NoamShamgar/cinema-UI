@@ -1,3 +1,5 @@
+// redux handles logged in user info
+
 function reducer (state={},action) {
 
     switch (action.type) {

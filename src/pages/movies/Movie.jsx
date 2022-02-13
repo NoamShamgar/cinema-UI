@@ -15,9 +15,7 @@ import {gridItemStyles} from "../../styles/styles"
 import { Fade } from '@mui/material';
 import Popover from '@mui/material/Popover';
 
-
 const useGridItemStyles = makeStyles(gridItemStyles)
-
 
 export default function Movie(props) {
   const [showUpdate, setShowUpdate] = useState(false);
@@ -25,11 +23,9 @@ export default function Movie(props) {
   const classes = useGridItemStyles();
   const [popoverAnchor, setPopoverAnchor] = useState(null);
 
-
   useEffect(() => {
     setShowUpdate(false)
   }, [props]);
-  
 
   const deleteMovie = async (id) => {
     try{
@@ -100,8 +96,6 @@ export default function Movie(props) {
                                           >
                                            <MembersWatched movieName={props.movie.name} MembersWatched={props.movie.membersWatched} /> {/* if no one watched it, the key won't appear */}
                                       </Popover>
-
-
     </Box>
 }
   

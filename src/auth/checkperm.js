@@ -1,8 +1,8 @@
 import appStore from "../redux/store";
 
-
+// checking if a specific permission is exist
 export default function checkPermissions (required) {
-    const loggerUserPerm = appStore.getState().permissions;
-    return loggerUserPerm.includes(required) || loggerUserPerm.includes("sys-admin")
+    const loggedInUserPerm = appStore.getState().permissions;
+    return loggedInUserPerm.includes(required) || loggedInUserPerm.includes("sys-admin")
 }
 

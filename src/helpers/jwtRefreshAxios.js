@@ -4,7 +4,7 @@ let path = "http://localhost:8000"
 
 
 // every response that fall outside 2xx codes, will enter this function
-// if the reason of the error is expired access token, this function will try to get a new token with the access token and send the req back to te client
+// if the reason of the error is expired access token, this function will try to get a new token with the access token and send the res back to the client
 const errorResponse = async (res) => {
 
   if (res.response?.data?.message == "jwt expired") { // the reason of the error is the access token expired
@@ -16,7 +16,7 @@ const errorResponse = async (res) => {
           await axios.post(`${path}/auth/refresh`,{refreshToken:rTok},{withCredentials:true});
           console.log("got new access token, trying to access data again . . .");
 
-           return await axios(res.config);
+           return await axios(res.config); // sending again the initial request
 
       } catch (err) {        
           alert("session is over");

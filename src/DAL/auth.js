@@ -5,6 +5,7 @@ const authAPI = axios.create({
     timeout:1000,
 })
 
+
 const login_DAL = async (email,password) => {
     return await authAPI.post("/login",{email,password});
 }

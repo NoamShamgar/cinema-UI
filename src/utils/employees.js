@@ -27,7 +27,7 @@ const deleteEmployee_UTIL = async (id) => {
     return (await deleteEmployee_DAL(id)).data;
 }
 
-const setPassToEmployee_UTIL = async (email,password) => {
+const setPassToEmployee_UTIL = async (email,password) => { // new employee is setting password
     return (await setPassToEmployee_DAL(email,password)).data;
 }
 

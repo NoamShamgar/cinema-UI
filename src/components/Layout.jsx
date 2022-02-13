@@ -16,22 +16,21 @@ import { makeStyles } from '@mui/styles';
 import IconButton from '@mui/material/IconButton';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
 
-
 const uselayoutStyles = makeStyles(layoutStyles)
 
-export default function Header(props) {
+// layout comp, contains header footer and page content
+export default function Layout(props) {
     const user = useSelector(state => state);
     const navigate = useNavigate();
     const classes = uselayoutStyles();
     const location = useLocation()
 
 
-    return (<div style={{display:"flex",flexDirection:"column",minHeight:"100vh"}}>
-            <AppBar position='sticky' style={{display:"flex",flexDirection:"column",margin:"20px 0"}}>
+    return (<div style={{display:"flex",flexDirection:"column",minHeight:"100vh"}}> 
+            <AppBar position='sticky' style={{display:"flex",flexDirection:"column",margin:"20px 0"}}> {/* main header and navbar */}
                 <Toolbar>
 
-            {Object.keys(user).length !== 0
-            ?
+            {Object.keys(user).length !== 0? // if user exist
                 <div className={classes.flex}>
                <Box style={{flexGrow:"1"}}>
                <Typography >
@@ -41,7 +40,7 @@ export default function Header(props) {
 
                </Box>
                 <Box style={{flexGrow:"4"}}>
-                    <ButtonGroup disableElevation >
+                    <ButtonGroup disableElevation>
                     {checkPermissions("view-sub")&&
                     <Button       
                         variant="text"
@@ -58,7 +57,7 @@ export default function Header(props) {
                         Movies
                     </Button>}
 
-                    {user.permissions.includes("sys-admin")&&
+                    {checkPermissions("sys-admin")&& // if this is the sys-admin
                     <Button  
                         variant="text"
                         color="secondary"
@@ -79,7 +78,7 @@ export default function Header(props) {
                         <ColorLensIcon color="secondary"/>
                     </IconButton>
 
-                    <Button 
+                    <Button
                         color="secondary"
                         onClick={()=>{
                         logout();
@@ -90,22 +89,24 @@ export default function Header(props) {
 
                 </Box>
 
-            </div>
+                </div>
 
-            :<div className={classes.flex}>
-                <div style={{flexGrow:1}}>
-            <Button color="secondary" variant="contained"onClick={()=>{navigate("login")}}>Login</Button>
-            </div>
-                 <IconButton onClick={props.changeTheme}>
-                        <ColorLensIcon color="secondary"/>
-                    </IconButton>
-            </div>
+            : // if user doesnt exist
+                <div className={classes.flex}>
+                    <div style={{flexGrow:1}}>
+                <Button color="secondary" variant="contained"onClick={()=>{navigate("login")}}>Login</Button>
+                </div>
+                        <IconButton onClick={props.changeTheme}>
+                            <ColorLensIcon color="secondary"/>
+                        </IconButton>
+                </div>
             }
 
    
       
             </Toolbar>
 
+            {/* secondary navbar */}
             {(location.pathname.includes("/movies") || location.pathname.includes("/members") || location.pathname.includes("/employees"))&&
             <Toolbar variant='dense' className={classes.themeSec}>
                  
@@ -120,21 +121,18 @@ export default function Header(props) {
             }
             </AppBar>
 
-            <div style={{flexGrow:1}}>
+            <div style={{flexGrow:1}}> {/* renders current component */}
             
             {props.children}
             </div>
       
-                <Box className={classes.themePrm} sx={{
+                <Box className={classes.themePrm} sx={{ // footer
                     marginTop:5,
                     padding:5,
                     textAlign:"center"
                 }}> 
                     <Typography color="secondary">Built by Noam Shamgar</Typography>
                 </Box>
-
-
-
         </div>
     )
 }

@@ -14,7 +14,6 @@ const getMovie_UTIL = async (id) => {
          delete movie.__v
          return movie;
     } catch(err) {
-        console.log("in err");
         return err;
     }
 }

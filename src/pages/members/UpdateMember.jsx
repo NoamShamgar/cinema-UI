@@ -36,7 +36,7 @@ export default function UpdateMember(props) {
 
     const updateMember = async () => {
         const errArr = checkValidation(member);
-        if (errArr.length !== 0) {
+        if (errArr.length !== 0) { // checking inputs
             setError(errArr)
             return
         }

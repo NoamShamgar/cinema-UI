@@ -13,7 +13,7 @@ export default function MembersList() {
     const navigate = useNavigate();
 
 
-    useEffect(() => {
+    useEffect(() => { // authorizaion
         !checkPermissions("view-sub") && navigate("/permdenied")
     }, []);
 
@@ -42,7 +42,7 @@ export default function MembersList() {
                                         member={member}
                                         fetchMembers={fetchMembers} />
                          </Grid>
-            )
+                )
             }
             </Grid>
         </div>

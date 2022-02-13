@@ -25,7 +25,7 @@ export default function UpdateEmployee(props) {
 
 
     useEffect(() => {
-        (async function callFetchData() {
+        (async function callFetchData() { // fetching employee details
             try{
                 const fetchedEmployee = await getEmployee_UTIL(props.id);
                 delete fetchedEmployee.ready;
@@ -34,7 +34,6 @@ export default function UpdateEmployee(props) {
                console.log(err);
            }
         })()
-      
     }, [])
 
     useEffect(() => { // preventing from exceeding the limits in sessTimeOut
@@ -53,7 +52,7 @@ export default function UpdateEmployee(props) {
 
 
     const updateEmployee = async () => {
-        const errArr = checkValidation(uptEmployee);
+        const errArr = checkValidation(uptEmployee); // validating inputs
         if (errArr.length !== 0) {
             setError(errArr)
             return

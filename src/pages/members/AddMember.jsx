@@ -21,8 +21,8 @@ export default function AddMember() {
     const [errors, setError] = useState("");
     const classes = useFormStyles()
     
-    // calling the fetch method on mount
-    useEffect(() => {
+    
+    useEffect(() => { // authorization
         !checkPermissions("add-sub") && navigate("/permdenied")
     }, []);
 

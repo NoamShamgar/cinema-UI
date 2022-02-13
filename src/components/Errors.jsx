@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { List, ListItem } from '@mui/material';
 import { useEffect } from 'react';
 
-
+// getting errors and displaying them
 export default function Errors({errors}) {
         const [errorState, setErrorState] = useState([]);
 
@@ -19,14 +19,14 @@ export default function Errors({errors}) {
                 } else { // error came from props / client side errors
                     setErrorState(errors)
                 }
-                // console.clear()
+                 console.clear() // clearing errors from console (after displaying them in the UI)
         }, [errors]);
         
     
     return (
         <Box>
-            {typeof errorState === "string"?<Typography color="error"> {errorState} </Typography>
-            :
+            {typeof errorState === "string"?<Typography color="error"> {errorState} </Typography> // if error state its a string, write it
+            :// if error state its an array, load a list
             <List dense={true}>
                 
                 {errorState.map((error,i) => 

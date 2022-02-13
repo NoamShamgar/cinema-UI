@@ -20,7 +20,7 @@ import "./styles/body.css"
 // MUI
 import { createTheme,ThemeProvider } from '@mui/material/styles';
 
-const yellowBluetheme = createTheme({
+const yellowBluetheme = createTheme({ // site first theme
     typography:{
         fontFamily: 'Josefin Sans'
     },
@@ -34,7 +34,7 @@ const yellowBluetheme = createTheme({
     }
 })
 
-const redTheme = createTheme({
+const redTheme = createTheme({ // site second theme
     typography:{
         fontFamily: 'Josefin Sans'
     },
@@ -50,8 +50,8 @@ const redTheme = createTheme({
 
 
 export default function Placeholder() { 
-    const [theme, setTheme] = useState(redTheme);
-    const user = useSelector(state => state);
+    const [theme, setTheme] = useState(redTheme); // state to decide which theme to display
+    const user = useSelector(state => state); // logged in user
     const dispatch = useDispatch();
 
     useEffect(() => { // if there is exist redux backup on session storage it means that the user has refreshed or like so, so it logging him in again.
@@ -63,11 +63,11 @@ export default function Placeholder() {
 
     }, []);
 
-    setInterval(() => {
-        Object.keys(user).length !== 0 && checkSession_DAL() // if the use is logged in the client will check to his session once a minute (for auto logout)
+    setInterval(() => { // if the use is logged in the client will check to his session once a minute (for auto logout)
+        Object.keys(user).length !== 0 && checkSession_DAL() 
     }, 60000);
     
-    const changeTheme = (e,refreshed=false) => {   
+    const changeTheme = (e,refreshed=false) => { // changing theme (on button click or refresh with saved theme)
         let savedTheme = sessionStorage.getItem("theme");
         if (refreshed){
             if(savedTheme === "yellowBluetheme") {
@@ -81,7 +81,7 @@ export default function Placeholder() {
     }
 
     useEffect(()=>{
-        sessionStorage.setItem("theme",theme === redTheme?"redTheme":"yellowBluetheme"); // backing up in theme
+        sessionStorage.setItem("theme",theme === redTheme?"redTheme":"yellowBluetheme"); // backing theme in session storage
     },[theme])
 
 
@@ -89,10 +89,10 @@ export default function Placeholder() {
     return (
         <div>
      
-                <ThemeProvider theme={theme}>
-            <Layout changeTheme={changeTheme}>
+                <ThemeProvider theme={theme}> {/* providing theme to components */}
+            <Layout changeTheme={changeTheme}> {/* layout comp, sending [changeTheme] function, will execute on button click */}
             <Routes>
-                {/* members routes */}
+                {/* logged in routes */}
                 <Route element={Object.keys(user).length !== 0?<Outlet/>:<Permdenied/>}>
 
                     <Route path="/main" element={<Main/>} />  
@@ -113,7 +113,7 @@ export default function Placeholder() {
                         <Route path="/members/:id" element={<Member />}/>
                 </Route> 
 
-                 {/* guests routes */}
+                 {/* logged out routes */}
                 <Route element={Object.keys(user).length !== 0?<Permdenied/>:<Outlet/>}>
                     <Route path="/" element={<Login/>}  />
                     <Route path="/login" element={<Login/>} />

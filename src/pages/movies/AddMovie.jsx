@@ -19,23 +19,20 @@ import {formStyles} from "../../styles/styles"
 
 const useFormStyles = makeStyles(formStyles)
 
-
 export default function AddMovie() {
     const navigate = useNavigate();
     const classes = useFormStyles();
 
-
     const [movie, setMovie] = useState({name:"",genres:[],image:"",premiered:""})
     const [errors, setError] = useState("");
 
-    
-    useEffect(() => {
+    useEffect(() => { // autorization
         !checkPermissions("add-mov") && navigate("/permdenied")
     }, []);
 
     const addMovie = async () => {
         const errArr = checkValidation(movie);
-        if (errArr.length !== 0) {
+        if (errArr.length !== 0) { // check inputs
             setError(errArr)
             return
         }
@@ -58,7 +55,6 @@ export default function AddMovie() {
     
     return (
         <Box className={classes.box}>
-
                 <Typography 
                     variant="h3" 
                     color="secondary"

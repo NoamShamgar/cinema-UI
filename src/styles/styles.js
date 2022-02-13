@@ -1,5 +1,6 @@
-const lightgray = "#f4f4f4"
+// MUI styles
 
+const lightgray = "#f4f4f4"
 
 
  const formStyles = {

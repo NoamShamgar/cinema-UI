@@ -15,7 +15,7 @@ export default function main() {
                 Here you can manage Members Movies or employees 
             </Typography>
             <Typography variant='h5'>
-                    (if you are the site king)
+                    (if you are the sys-king)
             </Typography>
 
 

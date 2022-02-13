@@ -23,40 +23,40 @@ export default function MoviesList() {
     const classes = useGridStyles()
 
 
-    useEffect(() => {
+    useEffect(() => { // authorizaion
         !checkPermissions("view-mov") && navigate("/permdenied")
     }, []);
     
-     // calling the fetch method on mount and checking permissions
-        useEffect(() => {
-            (async () => {
-            await fetchMovies();
-            setSearchString(location.search.split("=")[1]?.replaceAll("%20"," ") || "");
-            })()
-        },[]);
+    // calling the fetch method on mount set the search string from the url query if exist
+    useEffect(() => {
+        (async () => {
+        await fetchMovies();
+        setSearchString(location.search.split("=")[1]?.replaceAll("%20"," ") || "");
+        })()
+    },[]);
 
-        useEffect(() => { 
-            showSearchedMovies();
-        }, [searchString]);
+    useEffect(() => { // searching on every input change
+        showSearchedMovies();
+    }, [searchString]);
 
 
-        const showSearchedMovies = (clonedMovies = [...movies]) => {
-            clonedMovies.forEach(movie => {
-                    movie.show = movie.name.toLowerCase().includes(searchString.toLowerCase()) // if searchString is empty, this will return true
-            });
-            setMovies(clonedMovies); 
-        }
+    const showSearchedMovies = (clonedMovies = [...movies]) => { // setting show to the movies that passes the search
+        clonedMovies.forEach(movie => {
+                movie.show = movie.name.toLowerCase().includes(searchString.toLowerCase()) // if searchString is empty, this will return true
+        });
+        setMovies(clonedMovies); 
+    }
         
-        // fetching employees and setting in state
-        const fetchMovies = async () => {
-            try{
-                const allMovies = await getAllMoviesWithMembersWatched_UTIL();
-                showSearchedMovies(allMovies);
-                setLoading(false);
-            } catch (err) {
-                console.log(err);
-            }   
-        }
+    // fetching Movies and setting in state
+    const fetchMovies = async () => {
+        try{
+            const allMovies = await getAllMoviesWithMembersWatched_UTIL();
+            showSearchedMovies(allMovies);
+            setLoading(false);
+        } catch (err) {
+            console.log(err);
+        }   
+    }
 
 
     return <div style={{textAlign:"center"}}>

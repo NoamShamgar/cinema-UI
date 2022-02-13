@@ -19,7 +19,7 @@ export default function Member(props) {
     const [showUpdate, setShowUpdate] = useState(false);
 
     
-    useEffect(() => {
+    useEffect(() => { // authorization
      !checkPermissions("view-sub") && navigate("/permdenied")
     }, []);
     

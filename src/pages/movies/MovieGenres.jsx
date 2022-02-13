@@ -5,8 +5,6 @@ import { useState } from 'react'
 import { Button, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 
-
-
 export default function MovieGenres(props) {
     const [movieGenreInput,setMovieGenreInput] = useState("")
 
@@ -21,11 +19,7 @@ export default function MovieGenres(props) {
         const newGenres = [...props.movieGenres];
         newGenres.splice(i,1)
         props.setMovieGenres(newGenres)
-
-
     }
-
-
 
     return (
         <div>
@@ -35,10 +29,8 @@ export default function MovieGenres(props) {
             <Button onClick={addTextToGenres}>Add</Button>
             </Box>
 
-
             {props.movieGenres.map((genre,i) => <Typography color="secondary" sx={{display:"inline-block"}} key={i} onClick={()=>deleteGenre(i)}>  {i !== 0 && ","} {genre} </Typography>)}
        
-
         </div>
     )
 }

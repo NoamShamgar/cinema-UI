@@ -35,4 +35,5 @@ const deleteMovie_DAL = async (id) => {
     return await moviesAPI.delete(`/${id}`);
 }
 
+
 export {getAllMovies_DAL,getAllMoviesWithMembersWatched_DAL,getMovie_DAL,addMovie_DAL,updateMovie_DAL,deleteMovie_DAL}

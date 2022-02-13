@@ -18,8 +18,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-
-
 export default function AddMovieToMember(props) {
   const [moviesArr, setMoviesArr] = useState([]);
   const [date, setDate] = useState("");
@@ -55,13 +53,7 @@ export default function AddMovieToMember(props) {
    
   }, []);
 
-
-  
-  
-  
- 
-
-  const addToSub = async () => {
+  const addToSub = async () => { // adding movie to user sub
     const errArr = checkValidation({anyDate:date,selectedMovieId}); // changing the name of the date so the validation won't prevent future dates
     if (errArr.length !== 0) {
         setError(errArr)
@@ -74,8 +66,8 @@ export default function AddMovieToMember(props) {
       } else { // first time subscribe, create a new subscribe document
         await addSubscription_UTIL({memberId:props.memberId,movies:[{movieId:selectedMovieId,watchDate:date}]});
       }
-      props.closeAddSub();
-      props.fetchMembers();
+      props.closeAddSub(); // unmounting this component
+      props.fetchMembers(); // reloading list
 
     } catch (err) {
       console.log(err);
@@ -83,7 +75,7 @@ export default function AddMovieToMember(props) {
   }
 
 
-  const preWatchedMovies = (
+  const preWatchedMovies = ( // load all movies that havn'nt watched by the member
     <FormControl fullWidth>
 
         <InputLabel>Movie</InputLabel>

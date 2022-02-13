@@ -8,14 +8,14 @@ export default function EmployeesList() {
     const navigate = useNavigate()
     const [employees, setEmployees] = useState([])
 
-    useEffect(() => {
+    useEffect(() => { // authorization
         !checkPermissions("sys-admin") && navigate("/permdenied")
     }, []);
 
 
     // calling the fetch method on mount
     useEffect(() => {
-            fetchEmployees();
+        fetchEmployees();
     },[]);
 
     // fetching employees and setting in state

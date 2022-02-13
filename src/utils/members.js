@@ -32,7 +32,6 @@ const getMemberSubscription_UTIL = async (memberId) => {
         delete subscription.__v
         return subscription;
    } catch(err) {
-       console.log("in err");
        return err;
    }
 }

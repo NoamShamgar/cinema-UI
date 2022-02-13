@@ -6,16 +6,9 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import {formStyles} from "../../styles/styles"
-import { makeStyles } from '@mui/styles';
 
-
-const useFormStyles = makeStyles(formStyles)
 
 export default function EmployeePermissions(props) {
-    const classes = useFormStyles();
-
-
 
     const handleCBChange = (e) => { // handling CB change
         let newPermissions;
@@ -43,12 +36,13 @@ export default function EmployeePermissions(props) {
     }
 
     return (
-        <Box >
+        <Box>
             <FormGroup style={{textAlign:"left"}}>
                 <Typography 
                     variant="h6"
                     color="secondary">Permissions</Typography>
       
+                {/* checkboxes */}
                 <FormControlLabel  control={<Checkbox color='secondary' />} label="View-Subscriptions" type="checkbox" value="view-sub" checked={props.parentPermissionsState.some(permission => permission === "view-sub")} onChange={e=>handleCBChange(e)} />
                 <FormControlLabel sx={{margin:-1,marginLeft:2}} control={<Checkbox/>} label="Add-Subscriptions" value="add-sub" checked={props.parentPermissionsState.some(permission => permission === "add-sub")} onChange={e=>handleCBChange(e)} /> 
                 <FormControlLabel sx={{margin:-1,marginLeft:2}} control={<Checkbox/>} label="Update-Subscriptions" value="upt-sub" checked={props.parentPermissionsState.some(permission => permission === "upt-sub")} onChange={e=>handleCBChange(e)} />
@@ -58,11 +52,6 @@ export default function EmployeePermissions(props) {
                 <FormControlLabel sx={{margin:-1,marginLeft:2}} control={<Checkbox/>} label="Update-Movie" value="upt-mov" checked={props.parentPermissionsState.some(permission => permission === "upt-mov")} onChange={e=>handleCBChange(e)} /> 
                 <FormControlLabel sx={{margin:-1,marginLeft:2}} control={<Checkbox/>} label="Delete-Movie" value="del-mov" checked={props.parentPermissionsState.some(permission => permission === "del-mov")} onChange={e=>handleCBChange(e)} /> 
             </FormGroup> 
-
-
-
-
-
         </Box>
     )
 }

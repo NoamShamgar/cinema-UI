@@ -26,19 +26,17 @@ export default function Login() {
     const dispatch = useDispatch();
     const classes = useFormStyles();
 
-
+    // try to login
     const attemptLogin = async () => {
         const errArr = checkValidation({email,password});
         if (errArr.length !== 0) {
             setError(errArr)
             return
         }
-
         try {
             const employee = await login(email,password);
             navigate("/main");
             dispatch({type:"LOGIN",payload:employee});
-
         } catch (err) {
                     console.log(err.response.data);
                     setError(err);

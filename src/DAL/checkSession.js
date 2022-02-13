@@ -10,7 +10,7 @@ const checkSessionAPI = axios.create({
 // adding a "middleware" to handle error due to expired access token, trying to get a new one
 checkSessionAPI.interceptors.response.use((res => res),errorResponse)
 
-
+// called once a minute, to kick out employees even if they didnt req anything from the server
 const checkSession_DAL = async () => {
     return await checkSessionAPI.get();
 }

@@ -18,12 +18,10 @@ import {formStyles} from "../../styles/styles"
 
 const useFormStyles = makeStyles(formStyles)
 
-
 export default function UpdateMovie(props) {
     const [movie, setMovie] = useState({name:"",genres:[],image:"",premiered:""})
     const [errors, setError] = useState("");
     const classes = useFormStyles();
-
 
     useEffect(() => {
         (async function callFetchData() {
@@ -39,16 +37,16 @@ export default function UpdateMovie(props) {
         setMovie({...movie,genres});
     }
 
-    const updateMovie = async () => {
+    const updateMovie = async() => {
         const errArr = checkValidation(movie);
-        if (errArr.length !== 0) {
+        if (errArr.length !== 0) { // checking inputs
             setError(errArr)
             return
         }
         try {
             await updateMovie_UTIL(props.id,movie);
-            props.fetchMovies();
-            props.hideUpdateModal();
+            props.fetchMovies(); // refreshing movies list
+            props.hideUpdateModal(); // hiding this component
         } catch (err) {
             console.log(err);
         }
