@@ -1,13 +1,13 @@
 import axios from "axios";
 import {logout} from "../auth/auth"
-let path = "http://localhost:8000"
+let path = "https://cinema-employees-server.herokuapp.com"
 
 
 // every response that fall outside 2xx codes, will enter this function
 // if the reason of the error is expired access token, this function will try to get a new token with the access token and send the res back to the client
 const errorResponse = async (res) => {
 
-  if (res.response?.data?.message == "jwt expired") { // the reason of the error is the access token expired
+  if (res.response?.data?.message === "jwt expired") { // the reason of the error is the access token expired
         // asking for a new access token
         console.log("token expired, asking for a new one");
 
