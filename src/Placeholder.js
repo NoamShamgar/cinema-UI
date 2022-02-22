@@ -53,6 +53,7 @@ export default function Placeholder() {
     const [theme, setTheme] = useState(redTheme); // state to decide which theme to display
     const user = useSelector(state => state); // logged in user
     const dispatch = useDispatch();
+    const [reduxRdy, setReduxRdy] = useState(false); // if the user refreshed, everything will be displayed after the redux backup will load
 
     useEffect(() => { // if there is exist redux backup on session storage it means that the user has refreshed or like so, so it logging him in again.
         const savedReduxState = sessionStorage.getItem("redux-backup");
@@ -60,7 +61,7 @@ export default function Placeholder() {
             dispatch({type:"LOGIN",payload:JSON.parse(savedReduxState)});
         }
         changeTheme("",true) // getting the theme stay as he is if there is a backup in session-storage
-
+        setReduxRdy(true);
     }, []);
 
     setInterval(() => { // if the use is logged in the client will check to his session once a minute (for auto logout)
@@ -88,44 +89,43 @@ export default function Placeholder() {
 
     return (
         <div>
-     
-                <ThemeProvider theme={theme}> {/* providing theme to components */}
-            <Layout changeTheme={changeTheme}> {/* layout comp, sending [changeTheme] function, will execute on button click */}
-            <Routes>
-                {/* logged in routes */}
-                <Route element={Object.keys(user).length !== 0?<Outlet/>:<Permdenied/>}>
+            {reduxRdy&&
+            
+                    <ThemeProvider theme={theme}> {/* providing theme to components */}
+                <Layout changeTheme={changeTheme}> {/* layout comp, sending [changeTheme] function, will execute on button click */}
+                <Routes>
+                    {/* logged in routes */}
+                    <Route element={Object.keys(user).length !== 0?<Outlet/>:<Permdenied/>}>
 
-                    <Route path="/main" element={<Main/>} />  
-                    <Route path="/permdenied/*" element={<Permdenied/>} />
-  
+                        <Route path="/main" element={<Main/>} />  
+                        <Route path="/permdenied/*" element={<Permdenied/>} />
+    
 
-                    {/* employees routes */}
-                    <Route path="/employees" element={<EmployeesList/>} />
-                    <Route path="/employees/add" element={<AddEmployee />}/>
+                        {/* employees routes */}
+                        <Route path="/employees" element={<EmployeesList/>} />
+                        <Route path="/employees/add" element={<AddEmployee />}/>
 
-                    {/* movies routes */}
-                    <Route path="/movies" element={<MoviesList/>} />
-                    <Route path="/movies/add" element={<AddMovie />}/>
+                        {/* movies routes */}
+                        <Route path="/movies" element={<MoviesList/>} />
+                        <Route path="/movies/add" element={<AddMovie />}/>
 
-                        {/* subscriptions routes */}
-                        <Route path="/members" element={<MembersList/>} />
-                        <Route path="/members/add" element={<AddMember />}/>
-                        <Route path="/members/:id" element={<Member />}/>
-                </Route> 
+                            {/* subscriptions routes */}
+                            <Route path="/members" element={<MembersList/>} />
+                            <Route path="/members/add" element={<AddMember />}/>
+                            <Route path="/members/:id" element={<Member />}/>
+                    </Route> 
 
-                 {/* logged out routes */}
-                <Route element={Object.keys(user).length !== 0?<Permdenied/>:<Outlet/>}>
-                    <Route path="/" element={<Login/>}  />
-                    <Route path="/login" element={<Login/>} />
-                    <Route path="/setpass" element={<SetPass/>} />
-                </Route>    
-            </Routes>
-                </Layout>
-                </ThemeProvider>    
-         
-
-
-     
-        </div>
+                    {/* logged out routes */}
+                    <Route element={Object.keys(user).length !== 0?<Permdenied/>:<Outlet/>}>
+                        <Route path="/" element={<Login/>}  />
+                        <Route path="/login" element={<Login/>} />
+                        <Route path="/setpass" element={<SetPass/>} />
+                    </Route>    
+                </Routes>
+                    </Layout>
+                    </ThemeProvider>    
+            }
+            </div>
+            
     )
 }

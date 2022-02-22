@@ -2,7 +2,7 @@ import axios from "axios"
 import errorResponse from "../helpers/jwtRefreshAxios"
 
 const membersAPI = axios.create({
-    baseURL:"http://localhost:8000/members",
+    baseURL:"https://cinema-employees-server.herokuapp.com/members",
     withCredentials:true,
     timeout:1000,
 })

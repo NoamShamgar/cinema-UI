@@ -2,7 +2,7 @@ import axios from "axios"
 import errorResponse from "../helpers/jwtRefreshAxios"
 
 const subscriptionsAPI = axios.create({
-    baseURL:"http://localhost:8000/subscriptions",
+    baseURL:"https://cinema-employees-server.herokuapp.com/subscriptions",
     withCredentials:true,
     timeout:1000,
 })

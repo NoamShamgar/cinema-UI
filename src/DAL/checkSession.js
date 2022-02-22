@@ -2,7 +2,7 @@ import axios from "axios";
 import errorResponse from "../helpers/jwtRefreshAxios"
 
 const checkSessionAPI = axios.create({
-    baseURL:"http://localhost:8000/checkSession",
+    baseURL:"https://cinema-employees-server.herokuapp.com/checkSession",
     withCredentials:true,
     timeout:1000,
 });

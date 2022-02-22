@@ -41,6 +41,7 @@ export default function Layout(props) {
                </Box>
                 <Box style={{flexGrow:"4"}}>
                     <ButtonGroup disableElevation>
+                    
                     {checkPermissions("view-sub")&&
                     <Button       
                         variant="text"
@@ -48,7 +49,7 @@ export default function Layout(props) {
                         onClick={()=>navigate("/members")}>
                         Subscriptions
                     </Button>}
-
+                  
                     {checkPermissions("view-mov")&&
                     <Button  
                         variant="text"
@@ -56,7 +57,7 @@ export default function Layout(props) {
                         onClick={()=>navigate("/movies")}>
                         Movies
                     </Button>}
-
+                  
                     {checkPermissions("sys-admin")&& // if this is the sys-admin
                     <Button  
                         variant="text"
@@ -111,10 +112,10 @@ export default function Layout(props) {
             <Toolbar variant='dense' className={classes.themeSec}>
                  
                  <Box>
-            {location.pathname.includes("/movies")&&checkPermissions("add-mov")&&<Button onClick={()=>navigate(`movies/add`)}>Add</Button>}
-            {location.pathname.includes("/members")&&checkPermissions("add-sub")&&<Button onClick={()=>navigate(`members/add`)}>Add</Button>}
-            {location.pathname.includes("/employees")&&<Button onClick={()=>navigate(`employees/add`)}>Add</Button>}
-                    <Button onClick={()=>navigate(location.pathname.split("/")[1])}>List</Button>
+                        {location.pathname.includes("/movies")&&checkPermissions("add-mov")&&<Button onClick={()=>navigate(`movies/add`)}>Add</Button>}
+                        {location.pathname.includes("/members")&&checkPermissions("add-sub")&&<Button onClick={()=>navigate(`members/add`)}>Add</Button>}
+                        {location.pathname.includes("/employees")&&<Button onClick={()=>navigate(`employees/add`)}>Add</Button>}
+                        <Button onClick={()=>navigate(location.pathname.split("/")[1])}>List</Button>
                 </Box>
 
             </Toolbar>
