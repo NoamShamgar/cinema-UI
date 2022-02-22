@@ -10,9 +10,6 @@ if (process.env.NODE_ENV === "production") { // check if this is a production ve
     })
 }
 
-
-
-
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 8000;

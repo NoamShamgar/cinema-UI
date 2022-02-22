@@ -47,6 +47,7 @@ export default function Login() {
     return (
        <Box className={classes.box}>
             <Typography variant="h3" component="h1" color="primary" gutterBottom> Login </Typography>
+            <Typography variant="h6" component="h2" color="primary" gutterBottom> Admin: noam@gmail.com / 123456 </Typography>
                 <TextField 
                     size="small" 
                     type="text" 
