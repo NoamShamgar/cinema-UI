@@ -4,7 +4,6 @@ import errorResponse from "../helpers/jwtRefreshAxios"
 const membersAPI = axios.create({
     baseURL:"https://cinema-employees-server.herokuapp.com/members",
     withCredentials:true,
-    timeout:1000,
 })
 
 // adding a "middleware" to handle error due to expired access token, trying to get a new one

@@ -2,7 +2,6 @@ import axios from "axios"
 const authAPI = axios.create({
     baseURL:"https://cinema-employees-server.herokuapp.com/auth",
     withCredentials:true,
-    timeout:1000,
 })
 
 
