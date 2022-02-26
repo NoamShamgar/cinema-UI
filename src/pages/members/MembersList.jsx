@@ -23,13 +23,13 @@ export default function MembersList() {
     // calling the fetch method on mount
     useEffect(() => {
        fetchMembers();         
-       setLoading(false)
     }, []);
-
+    
     // fetching members and setting in state
     const fetchMembers = async () => {
         try{
             setMembers(await getAllMembers_UTIL());
+            setLoading(false)
        } catch (err) {
            console.log(err);
        }

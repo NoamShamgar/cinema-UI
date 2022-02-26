@@ -55,7 +55,9 @@ export default function Placeholder() {
     const dispatch = useDispatch();
     const [reduxRdy, setReduxRdy] = useState(false); // if the user refreshed, everything will be displayed after the redux backup will load
 
-    useEffect(() => { // if there is exist redux backup on session storage it means that the user has refreshed or like so, so it logging him in again.
+    useEffect(() => {
+        document.title = "Shamgar Cinema"
+        // if there is exist redux backup on session storage it means that the user has refreshed or like so, so it logging him in again.
         const savedReduxState = sessionStorage.getItem("redux-backup");
         if(savedReduxState) {
             dispatch({type:"LOGIN",payload:JSON.parse(savedReduxState)});

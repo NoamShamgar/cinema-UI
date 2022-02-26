@@ -19,13 +19,13 @@ export default function EmployeesList() {
     // calling the fetch method on mount
     useEffect(() => {
         fetchEmployees();
-        setLoading(false)
     },[]);
-
+    
     // fetching employees and setting in state
     const fetchEmployees = async () => {
         try{
             setEmployees(await getAllEmployees_UTIL());
+            setLoading(false)
        } catch (err) {
            console.log(err);
        }
