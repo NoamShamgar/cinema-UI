@@ -60,7 +60,6 @@ export default function UpdateMovie(props) {
             <Box className={`${classes.box} ${classes.fixedBox}`}>
             <Typography 
                             variant="h3" 
-                            color="secondary"
                             component="h1" 
                             color="primary">
                                 Update Movie

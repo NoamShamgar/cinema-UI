@@ -14,6 +14,8 @@ import { makeStyles } from '@mui/styles';
 import {formStyles} from "../../styles/styles"
 import { ButtonGroup } from '@mui/material';
 import KeyIcon from '@mui/icons-material/Key';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 const useFormStyles = makeStyles(formStyles)
 
@@ -22,22 +24,25 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setError] = useState("");
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const classes = useFormStyles();
-
+    
     // try to login
-    const attemptLogin = async () => {
+    const attemptLogin = async () => {        
         const errArr = checkValidation({email,password});
         if (errArr.length !== 0) {
             setError(errArr)
             return
         }
+        setLoading(true)
         try {
             const employee = await login(email,password);
             navigate("/main");
             dispatch({type:"LOGIN",payload:employee});
         } catch (err) {
+                    setLoading(false)
                     console.log(err.response.data);
                     setError(err);
             }
@@ -95,6 +100,8 @@ export default function Login() {
                     </Button>
                     </ButtonGroup>
                     <Errors errors={errors}/>
+
+                    {loading&&<CircularProgress sx={{display:"block",margin:"auto",width:"50%"}} disableShrink color="primary" />}
 
         </Box>
     )

@@ -6,10 +6,13 @@ import checkPermissions from '../../auth/checkperm';
 
 //MUI
 import { Grid } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 
 export default function MembersList() {
     const [members, setMembers] = useState([])
+    const [loading, setLoading] = useState(true)
     const navigate = useNavigate();
 
 
@@ -19,7 +22,8 @@ export default function MembersList() {
 
     // calling the fetch method on mount
     useEffect(() => {
-       fetchMembers(); 
+       fetchMembers();         
+       setLoading(false)
     }, []);
 
     // fetching members and setting in state
@@ -34,6 +38,7 @@ export default function MembersList() {
   
     return (
         <div>
+            {loading&&<CircularProgress sx={{display:"block",margin:"auto",width:"50%"}} disableShrink color="primary" />}
             <Grid container spacing={2}>
             {
              members.map((member,i) => 

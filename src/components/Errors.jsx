@@ -14,7 +14,7 @@ export default function Errors({errors}) {
         useEffect(() => {
                 if(errors.response?.data){ // axios error
                     setErrorState(errors.response?.data);
-                } else if (errors?.code == 11000) { // mongoose duplicate error, can only occur due email duplicate
+                } else if (errors?.code === 11000) { // mongoose duplicate error, can only occur due email duplicate
                     setErrorState("Email already exist");
                 } else { // error came from props / client side errors
                     setErrorState(errors)

@@ -65,7 +65,6 @@ export default function AddMember() {
             
 <Typography 
                     variant="h3" 
-                    color="secondary"
                     component="h1" 
                     color="primary">
                         Add Member

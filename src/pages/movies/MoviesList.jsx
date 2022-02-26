@@ -2,7 +2,6 @@ import React from 'react'
 import { useState,useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import {getAllMoviesWithMembersWatched_UTIL} from "../../utils/movies"
-import CircularProgress from '@mui/material/CircularProgress';
 import Movie from "./Movie";
 
 //MUI
@@ -10,6 +9,7 @@ import { Grid, TextField } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import {gridStyles} from "../../styles/styles"
 import checkPermissions from '../../auth/checkperm';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const useGridStyles = makeStyles(gridStyles)
 

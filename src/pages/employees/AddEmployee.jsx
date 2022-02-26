@@ -73,7 +73,6 @@ export default function AddEmployee() {
             <Box className={classes.box}>
                 <Typography 
                     variant="h3" 
-                    color="secondary"
                     component="h1" 
                     color="primary">
                         Add Employee

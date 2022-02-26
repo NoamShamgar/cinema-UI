@@ -75,7 +75,6 @@ export default function UpdateEmployee(props) {
                 <Box className={`${classes.box} ${classes.fixedBox}`}>
                     <Typography 
                             variant="h3" 
-                            color="secondary"
                             component="h1" 
                             color="primary">
                                 Update Employee
@@ -84,7 +83,6 @@ export default function UpdateEmployee(props) {
                         <Typography 
                             variant="body1"
                             paddingBottom={2}
-                            color="secondary"
                             color="secondary">
                                Created {dateToString(uptEmployee.created)}
                         </Typography>
